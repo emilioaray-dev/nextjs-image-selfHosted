@@ -1,0 +1,32 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - ENV_FILE=.env.local
+        - APP_ENV=production
+        - CONTAINER_PORT=3000
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+    restart: unless-stopped
+    volumes:
+      # Optional: Mount .env file if needed (but it's already built into the image)
+      # - ./.env.local:/app/.env.local:ro
+      - /app/node_modules # Avoid overriding node_modules in container
+
+  # Optional: Add a nginx proxy for production setups
+  # nginx:
+  #   image: nginx:alpine
+  #   ports:
+  #     - "80:80"
+  #     - "443:443"
+  #   volumes:
+  #     - ./nginx.conf:/etc/nginx/nginx.conf
+  #     - ./ssl:/etc/ssl
+  #   depends_on:
+  #     - app
+  #   restart: unless-stopped
