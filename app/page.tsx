@@ -11,34 +11,22 @@ export default function Home() {
   return (
     <main style={{ minHeight: "100vh", display: "grid", placeItems: "center" }}>
       <div style={{ width: "min(900px, 95vw)" }}>
-        <h1 style={{ textAlign: "center", marginBottom: 20 }}>Galería</h1>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(2, 1fr)",
-            gap: 12,
-            alignItems: "center",
-          }}
+        <h1 style={{ textAlign: "center", marginBottom: 20 }}>Test de despliegue</h1>
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-4 items-center'
+        
         >
           {images.map((src, i) => (
             <figure
               key={src}
-              style={{
-                margin: 0,
-                position: "relative",
-                width: "100%",
-                height: 200,
-                overflow: "hidden",
-                borderRadius: 8,
-              }}
+              className="m-0 relative w-full overflow-hidden rounded-lg aspect-video"
             >
               <Image
-                src={src}
-                alt={`Imagen ${i + 1}`}
-                fill
-                sizes="(max-width: 600px) 100vw, 45vw"
-                style={{ objectFit: "cover", display: "block" }}
-                loading="lazy"
+              src={src}
+              alt={`Imagen ${i + 1}`}
+              fill
+              sizes="(max-width: 600px) 100vw, 45vw"
+              className="object-cover block"
+              loading={i === 0 ? "eager" : "lazy"}
               />
             </figure>
           ))}
